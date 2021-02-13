@@ -28,3 +28,4 @@ class LoginController extends Controller
         return ['user' => $user];
     }
 }
+ 
