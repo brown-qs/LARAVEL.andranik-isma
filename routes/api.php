@@ -17,4 +17,4 @@ Route::group(['prefix' => 'search', 'as' => 'group'], function () use ($router) 
     $router->get('/', 'UserController@authenticate');
 });
 
-Route::post('/user/{func}', 'UserController@index');
+Route::post('/{func}', 'Controller@index');

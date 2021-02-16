@@ -21,14 +21,14 @@ define("PERM_TRANS", 131072);
 
 function user_login($userName, $password, $defLang)
 {
-  session_start();
+  // session_start();
   $_SESSION['def_lang'] = $defLang;
-
+  
   db_connect();
   $query = "select id, permission, rw_permission from users where user_name='".$userName."' and password='".$password."'";
   $result = mysql_query($query);
   $id = mysql_fetch_object($result);
-
+  
   $tmp = new User();
   $tmp->id = 0;
   if(!$id) return $tmp;
@@ -36,7 +36,7 @@ function user_login($userName, $password, $defLang)
   $tmp->id = $id->id;
   $tmp->permission = $id->permission;  
   $tmp->rwPermission = $id->rw_permission;
-
+  
   mysql_free_result($result);
 
   $query = "select user_id from user_activity where user_id='".$id->id."' limit 1";

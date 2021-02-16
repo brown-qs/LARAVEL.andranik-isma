@@ -235,7 +235,7 @@ function search_prog_comment($word, $lang, $progType, $progStage, $progText, $co
 function search_by_name($sp)
 {
   $ret = array();
-  session_start();
+  // session_start();
   $defLang = $_SESSION['def_lang'];
 
   db_connect();

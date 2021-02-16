@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Http\Controllers;
-
 define("ARM", 1);
 define("ENG", 2);
 define("WAM", 4);
