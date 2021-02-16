@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'group', 'as' => 'group'], function () use ($router) {
-    // $router->post('/login', 'LoginController@authenticate');
+Route::group(['prefix' => 'search', 'as' => 'group'], function () use ($router) {
+    $router->get('/', 'UserController@authenticate');
 });
 
-Route::post('/login', 'LoginController@authenticate');
+Route::post('/user/{func}', 'UserController@index');
