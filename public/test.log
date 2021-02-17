@@ -1,2 +1,2 @@
 select w.id, w.synonym_num, w.word, w.roots, w.lang, arm_w.word as arm_word, arm_w.roots as arm_roots
-            from words as w left outer join words as arm_w on w.id=arm_w.id and arm_w.lang = 2 and arm_w.synonym_num = '1' where w.word like '%sphinx%' and (w.role1='ANY' or w.role2='ANY' or w.role3='ANY' or w.role4='ANY' or w.role5='ANY') 
+            from words as w left outer join words as arm_w on w.id=arm_w.id and arm_w.lang = 2 and arm_w.synonym_num = '1' where w.word like '%deformation%' and (w.role1='ANY' or w.role2='ANY' or w.role3='ANY' or w.role4='ANY' or w.role5='ANY') 

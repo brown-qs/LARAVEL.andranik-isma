@@ -560,7 +560,7 @@ function get_programs($id)
 
 function get_relations($id)
 {
-  session_start();
+  // session_start();
   $defLang = $_SESSION['def_lang'];
   db_connect();
   $ret = array();
@@ -643,7 +643,7 @@ function get_caption($id)
 
 function get_classes($id)
 {
-  session_start();
+  // session_start();
   $defLang = $_SESSION['def_lang'];
 
   db_connect();
@@ -683,7 +683,7 @@ function get_class_ids($id)
 function get_environments($id)
 {
 
-  session_start();
+  // session_start();
   $defLang = $_SESSION['def_lang'];
   db_connect();
   $query = "SELECT words.word as env_name, environment.probability, environment.env_id
