@@ -38,7 +38,10 @@ define("DESTINAION_BINARY", "/data/wet/");
 
 function mysql_query($query)
 {
-  return mysqli_query(Session::get('db_link'), $query);
+  $link = Session::get('db_link');
+  if ($query == "START TRANSACTION") return mysqli_autocommit($link, FALSE);
+  else if ($query == "COMMIT") return mysqli_commit($link);
+  else return mysqli_query($link, $query);
 }
 function mysql_fetch_object($result)
 {
@@ -993,7 +996,7 @@ function save_data($userId, $concept)
   $vol = 0;
   $id_num = split_id($concept['id'], $vol);
 
-  if (($vol == 1 && $num >= 1 && $num <= 1000) || ($vol == 0 && $num >= 1 && $num <= 10)) {
+  if (($vol == 1 && $id_num >= 1 && $id_num <= 1000) || ($vol == 0 && $id_num >= 1 && $id_num <= 10)) {
     $ret = new ReturnData();
     $ret->error_code = 1;
     $ret->error_string = "No permissions to this concept";
@@ -1002,7 +1005,7 @@ function save_data($userId, $concept)
 
 
   db_connect();
-  mysql_query("START TRANSACTION");
+  // mysql_query("START TRANSACTION");
   //mysql_query("lock tables words write, caption write, class write, environment write, relation write, definition write");
 
   $sendReqest = false;
@@ -1369,7 +1372,7 @@ function save_data($userId, $concept)
 
   if ($ret->error_code == 0) {
     log_store($userId, 1, 4, $concept['id'], 0);
-    mysql_query("COMMIT");
+    // mysql_query("COMMIT");
   } else {
     mysql_query("ROLLBACK");
   }
