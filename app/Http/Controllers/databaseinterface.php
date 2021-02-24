@@ -1605,7 +1605,7 @@ function get_definition($id, $lang)
     $imgURLs[$imgUrl] = $mathML;
   }
   $ret['html'] = $txt;
-  $ret['imgURLs'] = $imgURLs;
+  // $ret['imgURLs'] = $imgURLs;
   return $ret;
 }
 
