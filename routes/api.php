@@ -13,8 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'search', 'as' => 'group'], function () use ($router) {
-    $router->get('/', 'UserController@authenticate');
-});
-
 Route::post('/{func}', 'Controller@index');
