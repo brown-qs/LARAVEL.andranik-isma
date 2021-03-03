@@ -1,3 +1,2 @@
-select t.id as id, t.from_id as from_id, t.date as taskDate, t.time as taskTime, t.task as task, u1.user_name as currUserName, u2.user_name as userName 
-              from tasks as t left join users as u1 on t.id = u1.id left join users as u2 on t.from_id = u2.id
-              where t.from_id='2' order by taskDate desc, taskTime desc
+select w.id, w.synonym_num, w.word, w.roots, w.lang, arm_w.word as arm_word, arm_w.roots as arm_roots
+            from words as w left outer join words as arm_w on w.id=arm_w.id and arm_w.lang = 1 and arm_w.synonym_num = '1' where w.word like '%knowlege%' 
