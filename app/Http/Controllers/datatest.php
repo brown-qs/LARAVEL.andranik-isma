@@ -309,8 +309,8 @@ function check_roots($concept, $lang)
   $langWords =  strtolower($langNam)."Words";
     
   $syn_count = count($concept[$langWords]);
-  $found_symbol = false; // � symbol
-  $not_found_symbol = false; // � symbol
+  $found_symbol = false; // ¤ symbol
+  $not_found_symbol = false; // ¤ symbol
 
   if($syn_count == 0)
   { $ret = "Error <".$langWords."> Concept must has at least one synonym\n";
@@ -341,10 +341,10 @@ function check_roots($concept, $lang)
     for ($j= 0; $j < $root_count; $j++) 
     { $root_len = strlen($roots[$j]); // armati skzbic ev verjic chen karox linel prabelner
 
-      if($roots[$j][0] == '�')
+      if($roots[$j][0] == '¤')
         $tmp_found_symbol = true;
 
-      if($root_len == 0 || ($root_len == 1 && ($roots[$j][0]=='*'||$roots[$j][0]=='#'||$roots[$j][0]=='~'||$roots[$j][0]=='�')))
+      if($root_len == 0 || ($root_len == 1 && ($roots[$j][0]=='*'||$roots[$j][0]=='#'||$roots[$j][0]=='~'||$roots[$j][0]=='¤')))
       { $ret = $ret.$err_caption."the root '".$roots[$j]."' is empty\n";
         continue;
       }
@@ -357,7 +357,7 @@ function check_roots($concept, $lang)
       for ($k= 0; $k < $root_len - 1; $k++) 
         if(($roots[$j][$k] == ' ' && $roots[$j][$k+1] == ' ')||($roots[$j][$k] == '*' && $roots[$j][$k+1] == '*')||
            ($roots[$j][$k] == '#' && $roots[$j][$k+1] == '#')||($roots[$j][$k] == '~' && $roots[$j][$k+1] == '~')|| 
-           ($roots[$j][$k] == '�' && $roots[$j][$k+1] == '�')||($roots[$j][$k] == ',' && $roots[$j][$k+1] == ',')) 
+           ($roots[$j][$k] == '¤' && $roots[$j][$k+1] == '¤')||($roots[$j][$k] == ',' && $roots[$j][$k+1] == ',')) 
         { $ret = $ret.$err_caption."the root '".$roots[$j]."' has more then one sequence of '".$roots[$j][$k]."' symbol'\n"; 
           $fl = true;
           break;
@@ -367,12 +367,12 @@ function check_roots($concept, $lang)
       for ($k= 0; $k < $root_len - 1; $k++) 
         if(($roots[$j][$k] == '*' && $roots[$j][$k+1] == '#')||($roots[$j][$k] == '#' && $roots[$j][$k+1] == '*')||
            ($roots[$j][$k] == '~' && $roots[$j][$k+1] == '*')||($roots[$j][$k] == '~' && $roots[$j][$k+1] == '#')||
-           ($roots[$j][$k] == '�' && $roots[$j][$k+1] == '*')||($roots[$j][$k] == '�' && $roots[$j][$k+1] == '#')||
-           ($roots[$j][$k] == '�' && $roots[$j][$k+1] == '~')||($roots[$j][$k] == '�' && $roots[$j][$k+1] == ' ')||
+           ($roots[$j][$k] == '¤' && $roots[$j][$k+1] == '*')||($roots[$j][$k] == '¤' && $roots[$j][$k+1] == '#')||
+           ($roots[$j][$k] == '¤' && $roots[$j][$k+1] == '~')||($roots[$j][$k] == '¤' && $roots[$j][$k+1] == ' ')||
            ($roots[$j][$k] == '~' && $roots[$j][$k+1] == ' ')||($roots[$j][$k] == '#' && $roots[$j][$k+1] == ' ')||
            ($roots[$j][$k] == '*' && $roots[$j][$k+1] == ' ')||($roots[$j][$k] == ' ' && $roots[$j][$k+1] == '*')||
            ($roots[$j][$k] == ' ' && $roots[$j][$k+1] == '#')||($roots[$j][$k] == ' ' && $roots[$j][$k+1] == '~')||
-           ($roots[$j][$k] == ' ' && $roots[$j][$k+1] == '�'))
+           ($roots[$j][$k] == ' ' && $roots[$j][$k+1] == '¤'))
         { $ret = $ret.$err_caption." the root '".$roots[$j]."' has wrong sequence of symbols '".$roots[$j][$k]."' and '".$roots[$j][$k+1]."'\n"; 
           $fl = true;
           break;
@@ -395,12 +395,12 @@ function check_roots($concept, $lang)
           $fl = true;
           break;
         }
-        if($roots[$j][$k] == '�' && $k != $root_len - 1 && (!$k || ($k && ($roots[$j][$k-1]==')'||
+        if($roots[$j][$k] == '¤' && $k != $root_len - 1 && (!$k || ($k && ($roots[$j][$k-1]==')'||
            $roots[$j][$k-1]=='#' || $roots[$j][$k-1]=='~'))));
         else
         { 
-          if($roots[$j][$k] == '�')
-          { $ret = $ret.$err_caption."Wrong place for symbol '�' in the root '".$roots[$j]."'\n"; 
+          if($roots[$j][$k] == '¤')
+          { $ret = $ret.$err_caption."Wrong place for symbol '¤' in the root '".$roots[$j]."'\n"; 
             $fl = true;
             break;
           }
@@ -415,7 +415,7 @@ function check_roots($concept, $lang)
   }
 
   if($found_symbol && $not_found_symbol)
-    $ret = $ret.$err_caption."The symbol '�' must have all roots'\n"; 
+    $ret = $ret.$err_caption."The symbol '¤' must have all roots'\n"; 
 
        //file_put_contents("test.log","first root check -- {$ret}      {$lang}");
   

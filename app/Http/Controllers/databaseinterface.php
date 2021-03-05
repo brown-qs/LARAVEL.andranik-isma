@@ -13,7 +13,7 @@ define("DATABASE_USERNAME", "root");
 define("DATABASE_PASSWORD", "root12");
 
 
-define("DATABASE_NAME", "knowbot");
+define("DATABASE_NAME", "knowbottest");
 define("TRANSSERVER_HOST", "109.75.37.241");
 define("TRANSSERVER_PORT", 4044);
 define("CONVSERVER_HOST", "109.75.37.241");
@@ -260,12 +260,13 @@ function search_by_name($sp)
     return $ret;
   }
 
-  if (
-    strlen($sp['baseRole']) == 0 && strlen($sp['frequency']) == 0 && count($sp['relations']) == 0 && strlen($sp['className']) == 0
+  if(strlen($sp['baseRole']) == 0 && strlen($sp['frequency']) == 0 && empty($sp['relations']) && strlen($sp['className']) == 0
     && strlen($sp['envName']) == 0 && strlen($sp['text']) == 0 && strlen($sp['rootNumber']) == 0 && strlen($sp['synNumber']) == 0
-    && strlen($sp['role']) == 0 && strlen($sp['defNumber']) == 0
-  )
+     && strlen($sp['role']) == 0 && strlen($sp['defNumber']) == 0)
+     {
+      file_put_contents("/tmp/tlogU", " ret: " . print_r($ret, true) . "\n", FILE_APPEND);
     return $ret;
+     }
 
   // and w.synonym_num = arm_w.synonym_num   
   $query = "select w.id, w.synonym_num, w.word, w.roots, w.lang, arm_w.word as arm_word, arm_w.roots as arm_roots
@@ -273,7 +274,7 @@ function search_by_name($sp)
   if (strlen($sp['baseRole']) != 0 || strlen($sp['frequency']) != 0)
     $query = $query . "left outer join caption as c on w.id = c.id ";
 
-  $rel_count = count($sp['relations']);
+  $rel_count = empty($sp['relations']) ? 0 : count($sp['relations']);
   if ($rel_count != 0)
     $query = $query . "left outer join relation as r on w.id=r.id 
                      left outer join words as rel_w on (rel_w.id = r.rel_id and rel_w.lang = {$defLang} and  rel_w.synonym_num = 1) ";
@@ -468,7 +469,7 @@ function search_by_name($sp)
   //  $query = $query." group by w.id";
 
   $result = mysql_query($query);
-  file_put_contents("test.log", $query);
+  //file_put_contents("test.log", $query);
 
   while ($row = mysql_fetch_object($result)) {
     $tmp = new SearchResult();
@@ -1562,9 +1563,10 @@ function get_definition($id, $lang)
       $txt = $row->def;
     }
   }
-  if (strpos($txt, "<flow:TextFlow ") === FALSE) {
+  if(empty($txt)) $txt = '';
+  /*if (strpos($txt, "<flow:TextFlow ") === FALSE) {
     $txt = "<flow:TextFlow fontSize=\"14\" fontFamily=\"Arial Armenian\" whiteSpaceCollapse=\"preserve\" xmlns:flow=\"http://ns.adobe.com/textLayout/2008\"><flow:div><flow:p><flow:span>" . $txt . "</flow:span></flow:p></flow:div></flow:TextFlow>";
-  }
+  }*/
 
   mysql_free_result($result);
   $pos = strpos($txt, "<flow:img ");

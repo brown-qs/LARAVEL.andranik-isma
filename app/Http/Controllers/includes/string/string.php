@@ -7,15 +7,15 @@ function GetIProto($packet)
 
 }
 
-// function hex2bin($hexdata) {
+function hex2bin1($hexdata) {
 	
-//   #$strdata = '';
-//   $bindata = "";
-//   for ($i=0;$i<strlen($hexdata);$i+=2) {
-//      $bindata.= chr(hexdec(substr($hexdata,$i,2)));
-//   }  
-//   return $bindata;
-// }
+  #$strdata = '';
+  $bindata = "";
+  for ($i=0;$i<strlen($hexdata);$i+=2) {
+     $bindata.= chr(hexdec(substr($hexdata,$i,2)));
+  }  
+  return $bindata;
+}
 
 function ArmAnsiToUTF8( &$ansistr )
 {

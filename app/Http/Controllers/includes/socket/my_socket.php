@@ -7,8 +7,8 @@ function my_socket_connect($address, $port)
 	$socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
 	if ($socket == false) {
 	#    echo "socket_create() failed.<br>Reason: ($result) " . socket_strerror(socket_last_error()) . "<br>";
-			file_put_contents("trans_error.log","[".date("c")."]"."socket_create() failed.<br>Reason: ($socket) Code:".socket_last_error($socket)." . msg:". socket_strerror(socket_last_error()) . "<br>\n\n",FILE_APPEND);
-			file_put_contents("trans_error.log","***************************************************************************************\n\n",FILE_APPEND);
+			//file_put_contents("trans_error.log","[".date("c")."]"."socket_create() failed.<br>Reason: ($socket) Code:".socket_last_error($socket)." . msg:". socket_strerror(socket_last_error()) . "<br>\n\n",FILE_APPEND);
+			//file_put_contents("trans_error.log","***************************************************************************************\n\n",FILE_APPEND);
 
     	return false;
 	}
@@ -16,7 +16,7 @@ function my_socket_connect($address, $port)
 	$result = socket_connect($socket, $address, $port);
 	if ($result === false) {
 	  #echo "socket_connect() failed.<br>Reason: ($result) Code:".socket_last_error($socket)." . msg:". socket_strerror(socket_last_error($socket)) . "<br>";
-	  file_put_contents("trans_error.log","socket_connect() failed. Reason: ($result) Code:".socket_last_error($socket)." . msg:". socket_strerror(socket_last_error($socket)) . "\r\n",FILE_APPEND);
+	  //file_put_contents("trans_error.log","socket_connect() failed. Reason: ($result) Code:".socket_last_error($socket)." . msg:". socket_strerror(socket_last_error($socket)) . "\r\n",FILE_APPEND);
 		socket_close($socket);
 		return false;
 	} 

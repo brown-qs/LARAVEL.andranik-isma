@@ -1,13 +1,13 @@
 <?php 
 include_once("includes/socket/my_socket.php");
 include_once("includes/file/file.php");
-include_once("includes/string/string.php");
+#include_once("includes/string/string.php");
 include_once ('databaseinterface.php');
 
 function getTDL($text, $transDirection) 
 { 
 //  $text = utf8_decode($text);
-   file_put_contents("test.log",$text);
+   //file_put_contents("test.log",$text);
 
   $user_name = log_store(1000, 5, 3, 0, 0);
   if(strlen($user_name)) // if some user is now converting the base
@@ -74,7 +74,7 @@ function getTDL($text, $transDirection)
 	return $TransText;
 } 
 
-ini_set("soap.wsdl_cache_enabled", "0"); // отключаем кэширование WSDL
+ini_set("soap.wsdl_cache_enabled", "0"); // ??? ????WSDL
 $server = new SoapServer("tdl.wsdl", array('encoding'=>'ISO-8859-1')); 
 $server->addFunction("getTDL"); 
 $server->handle(); 

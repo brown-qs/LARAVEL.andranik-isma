@@ -225,7 +225,7 @@ function get_user_task($id, $inbox)
               from tasks as t left join users as u1 on t.id = u1.id left join users as u2 on t.from_id = u2.id
               where t.from_id='".$id."' order by taskDate desc, taskTime desc";
 
-  file_put_contents("test.log",$query);
+  //file_put_contents("test.log",$query);
   $result = mysql_query($query);
   while($row = mysql_fetch_object($result)) 
   {

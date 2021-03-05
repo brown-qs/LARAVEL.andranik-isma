@@ -258,7 +258,7 @@ function addPrepEnding($user_id, $lang, $prep, $role, $parentType, $isPrep, $she
   $query = "insert into words values ('".$lang."','".$new_id."','1','"."$".$prep."','"."$".$prep."','"."$".$prep."','".($role + $removal)."','0','0','0','0','0','0','0','0','0','0')";
   
 
-file_put_contents("test.log",$query);  
+//file_put_contents("test.log",$query);  
     if(mysql_query($query) === false) {
         return false;
     }
@@ -1258,7 +1258,7 @@ function copy_binary_database($source_root, $destination_root, $use_ssh = false)
    }
 
 
-file_put_contents("test.log","count". count($data_base_files), FILE_APPEND);
+//file_put_contents("test.log","count". count($data_base_files), FILE_APPEND);
    for($i = 0; $i < count($data_base_files); $i++)
    {
      $query = "select mod_time from db_files where file_name = '{$data_base_files[$i]}'";
@@ -1275,7 +1275,7 @@ file_put_contents("test.log","count". count($data_base_files), FILE_APPEND);
          
        $ret = false;
 
-       file_put_contents("test.log",$source_root.$data_base_files[$i]." --- ".$destination_root.$data_base_files[$i], FILE_APPEND);
+       //file_put_contents("test.log",$source_root.$data_base_files[$i]." --- ".$destination_root.$data_base_files[$i], FILE_APPEND);
        if($use_ssh)
          $ret = ssh2_scp_send($connection, $source_root.$data_base_files[$i], $destination_root.$data_base_files[$i]);
        else
@@ -1353,7 +1353,7 @@ function translate_text($text, $transDirction)
   else
     close_data(0, 5, 0, 0);
 
-  file_put_contents("messages.log", "");
+  //file_put_contents("messages.log", "");
 
   $dst_text = send_translation_request(utf8_decode($text), $transDirction, "translate");
   if(strlen($dst_text) == 0)
