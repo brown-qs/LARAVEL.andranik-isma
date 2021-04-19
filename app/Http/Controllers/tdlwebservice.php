@@ -74,7 +74,7 @@ function getTDL($text, $transDirection)
 	return $TransText;
 } 
 
-ini_set("soap.wsdl_cache_enabled", "0"); // ??? ????WSDL
+ini_set("soap.wsdl_cache_enabled", "0"); // отключаем кэширование WSDL
 $server = new SoapServer("tdl.wsdl", array('encoding'=>'ISO-8859-1')); 
 $server->addFunction("getTDL"); 
 $server->handle(); 

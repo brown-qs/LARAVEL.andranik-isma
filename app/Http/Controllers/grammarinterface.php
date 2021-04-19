@@ -1441,7 +1441,7 @@ function get_TDL($text, $transDirection)
 		return "error";
 	}
 
-  	file_put_contents("1.xml", $TransText);
+  	//file_put_contents("1.xml", $TransText);
 
 	return utf8_encode($TransText);
 

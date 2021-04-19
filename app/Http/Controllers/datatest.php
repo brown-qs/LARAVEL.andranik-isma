@@ -21,7 +21,7 @@ function get_concept_name($id)
   $result = mysql_query($query);
   $name = mysql_fetch_object($result);
   mysql_free_result($result);
-  return $name->word;
+  return ($name && $name->word) ? $name->word : '';
 }
 
 function get_concept_id($name)
@@ -49,8 +49,8 @@ function mix_id($vol, $num)
 {
   
   $id = $vol;
-  $id = $id << 16;
-  $id = $id | $num;
+  $id = intval($id) << 16;
+  $id = $id | intval($num);
   return $id;
 }
 
@@ -186,6 +186,7 @@ function role_decl_check($concept, $lang)
     $type = $obj->type;
   }
 
+  if(empty($role)) $role = 0;
   if($role > 7 || $role == 5 || $type == 5)  
     return "";
 

@@ -20,8 +20,7 @@ define("CONVSERVER_HOST", "109.75.37.241");
 define("CONVSERVER_PORT", 7070);
 define("SOURCE_BINARY", "/home/Converter/");
 define("DESTINAION_BINARY", "/home/wet/");
-
-define("IMAGES_URL", "http://109.75.37.241:8111/Editor/amfphp/services/images/");
+define("IMAGES_URL", "http://109.75.37.241:8112/Editor/editornew/app/Http/Controllers/images/");
 define("IMAGES_PATH", "images/");
 
 /*define( "DATABASE_SERVER", "localhost");
@@ -1040,11 +1039,19 @@ function save_data($userId, $concept)
 
     $query = "insert into relation values ";
     $find_rel = false;
+	$maxRelNum = 1;
+	for($i = 0; $i < $rel_count; $i++){
+		if($concept['relations'][$i] && isset($concept['relations'][$i]['rel_num']) && intval($concept['relations'][$i]['rel_num']) > $maxRelNum){
+			$maxRelNum = intval($concept['relations'][$i]['rel_num']);
+		}
+	}
     for ($i = 0; $i < $rel_count; $i++) {
       $rel = $concept['relations'][$i];
       //           file_put_contents("test.log",$rel_count);
 
-      if ($rel['id'] == 0) {
+      if (empty($rel['id']) || $rel['id'] == 0) {
+		$rel['rel_num'] = strval($maxRelNum);
+		$maxRelNum++;
         $rel['id'] = $concept['id'];
         $rel['conceptID'] = get_concept_id(utf8_decode($rel['conceptName']));
         if ($rel['conceptID'] == 0 || $rel['conceptID'] === false) {
